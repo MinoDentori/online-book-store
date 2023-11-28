@@ -1,12 +1,11 @@
 package mate.academy.onlinebookstore.service.impl;
 
+import java.util.List;
 import mate.academy.onlinebookstore.model.Book;
 import mate.academy.onlinebookstore.repository.BookRepository;
 import mate.academy.onlinebookstore.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -19,7 +18,7 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List findAll() {
+    public List<Book> findAll() {
         return bookRepository.findAll();
     }
 }
