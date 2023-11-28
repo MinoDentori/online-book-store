@@ -1,23 +1,21 @@
 package mate.academy.onlinebookstore.repository.impl;
 
 import java.util.List;
+
+import lombok.RequiredArgsConstructor;
+import mate.academy.onlinebookstore.exception.EntityNotFoundException;
 import mate.academy.onlinebookstore.model.Book;
 import mate.academy.onlinebookstore.repository.BookRepository;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+@RequiredArgsConstructor
 @Repository
 public class BookRepositoryImpl implements BookRepository {
     private final SessionFactory sessionFactory;
-
-    @Autowired
-    public BookRepositoryImpl(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
 
     @Override
     public Book save(Book book) {
@@ -45,10 +43,22 @@ public class BookRepositoryImpl implements BookRepository {
     public List<Book> findAll() {
         try (Session session = sessionFactory.openSession()) {
             Query<Book> getAllBooksQuery = session.createQuery(
-                    "from Book", Book.class);
+                    "FROM Book", Book.class);
             return getAllBooksQuery.getResultList();
         } catch (Exception e) {
             throw new RuntimeException("Can't get a List of Books from DB:", e);
+        }
+    }
+
+    @Override
+    public Book getBookById(Long id) {
+        try (Session session = sessionFactory.openSession()) {
+            Query<Book> getBookByIdQuery = session.createQuery(
+                    "FROM Book b WHERE b.id = :id ", Book.class);
+            getBookByIdQuery.setParameter("id", id);
+            return getBookByIdQuery.uniqueResult();
+        } catch (Exception e) {
+            throw new EntityNotFoundException("Didn't find book in DB with id:" + id, e);
         }
     }
 }
