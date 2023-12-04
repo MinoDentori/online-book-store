@@ -45,7 +45,7 @@ public class BookRepositoryImpl implements BookRepository {
                     "FROM Book", Book.class);
             return getAllBooksQuery.getResultList();
         } catch (Exception e) {
-            throw new RuntimeException("Can't get a List of Books from DB:", e);
+            throw new EntityNotFoundException("Can't get a List of Books from DB:", e);
         }
     }
 
