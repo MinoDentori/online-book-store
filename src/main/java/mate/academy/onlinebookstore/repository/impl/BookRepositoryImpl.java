@@ -17,7 +17,7 @@ public class BookRepositoryImpl implements BookRepository {
     private final SessionFactory sessionFactory;
 
     @Override
-    public Book save(Book book) {
+    public Book createBook(Book book) {
         Session session = null;
         Transaction transaction = null;
         try {
@@ -39,7 +39,7 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public List<Book> findAll() {
+    public List<Book> getAll() {
         try (Session session = sessionFactory.openSession()) {
             Query<Book> getAllBooksQuery = session.createQuery(
                     "FROM Book", Book.class);

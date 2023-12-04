@@ -19,15 +19,15 @@ public class BookServiceImpl implements BookService {
     private final BookMapper bookMapper;
 
     @Override
-    public BookDto save(CreateBookRequestDto bookDto) {
+    public BookDto createBook(CreateBookRequestDto bookDto) {
         Book book = bookMapper.toModel(bookDto);
-        Book savedBook = bookRepository.save(book);
+        Book savedBook = bookRepository.createBook(book);
         return bookMapper.toDto(savedBook);
     }
 
     @Override
-    public List<BookDto> findAll() {
-        return bookRepository.findAll().stream()
+    public List<BookDto> getAll() {
+        return bookRepository.getAll().stream()
                 .map(bookMapper::toDto)
                 .collect(Collectors.toList());
     }

@@ -19,8 +19,8 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    public List<BookDto> findAll() {
-        return bookService.findAll();
+    public List<BookDto> getAll() {
+        return bookService.getAll();
     }
 
     @GetMapping("/{id}")
@@ -29,7 +29,7 @@ public class BookController {
     }
 
     @PostMapping
-    private BookDto save(@RequestBody CreateBookRequestDto requestDto) {
-        return bookService.save(requestDto);
+    private BookDto createBook(@RequestBody CreateBookRequestDto requestDto) {
+        return bookService.createBook(requestDto);
     }
 }

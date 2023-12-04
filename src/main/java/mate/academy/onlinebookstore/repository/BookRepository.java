@@ -4,9 +4,9 @@ import java.util.List;
 import mate.academy.onlinebookstore.model.Book;
 
 public interface BookRepository {
-    Book save(Book book);
+    Book createBook(Book book);
 
-    List<Book> findAll();
+    List<Book> getAll();
 
     Book getById(Long id);
 }
