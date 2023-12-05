@@ -1,6 +1,7 @@
 package mate.academy.onlinebookstore.repository.impl;
 
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import mate.academy.onlinebookstore.exception.EntityNotFoundException;
 import mate.academy.onlinebookstore.model.Book;
@@ -50,12 +51,12 @@ public class BookRepositoryImpl implements BookRepository {
     }
 
     @Override
-    public Book getById(Long id) {
+    public Optional<Book> findById(Long id) {
         try (Session session = sessionFactory.openSession()) {
             Query<Book> getBookByIdQuery = session.createQuery(
                     "FROM Book b WHERE b.id = :id ", Book.class);
             getBookByIdQuery.setParameter("id", id);
-            return getBookByIdQuery.uniqueResult();
+            return Optional.ofNullable(getBookByIdQuery.uniqueResult());
         } catch (Exception e) {
             throw new EntityNotFoundException("Didn't find book in DB with id:" + id, e);
         }
