@@ -1,5 +1,6 @@
 package mate.academy.onlinebookstore.service.impl;
 
+import jakarta.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
@@ -21,13 +22,13 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookDto createBook(CreateBookRequestDto bookDto) {
         Book book = bookMapper.toModel(bookDto);
-        Book savedBook = bookRepository.createBook(book);
+        Book savedBook = bookRepository.save(book);
         return bookMapper.toDto(savedBook);
     }
 
     @Override
     public List<BookDto> getAll() {
-        return bookRepository.getAll().stream()
+        return bookRepository.findAll().stream()
                 .map(bookMapper::toDto)
                 .collect(Collectors.toList());
     }
@@ -37,6 +38,22 @@ public class BookServiceImpl implements BookService {
         Book foundedBook = bookRepository.findById(id).orElseThrow(() ->
                 new EntityNotFoundException("Can't get employee from DB by id:" + id));
         return bookMapper.toDto(foundedBook);
+    }
+
+    @Override
+    @Transactional
+    public BookDto updateBookById(Long id, CreateBookRequestDto requestDto) {
+        Book bookFromDb = bookRepository.findById(id).orElseThrow(() ->
+                new EntityNotFoundException("Can't get employee from DB by id:" + id));
+        Book updatedBook = bookMapper.toModel(requestDto);
+        updatedBook.setId(id);
+        bookRepository.save(updatedBook);
+        return bookMapper.toDto(updatedBook);
+    }
+
+    @Override
+    public void deleteBookById(Long id) {
+        bookRepository.deleteById(id);
     }
 
 }
