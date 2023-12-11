@@ -1,5 +1,6 @@
 package mate.academy.onlinebookstore.controller;
 
+import jakarta.validation.Valid;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.onlinebookstore.dto.BookDto;
@@ -39,13 +40,13 @@ public class BookController {
     }
 
     @PostMapping
-    private BookDto createBook(@RequestBody CreateBookRequestDto requestDto) {
+    private BookDto createBook(@RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.createBook(requestDto);
     }
 
     @PutMapping("/{id}")
     private BookDto updateBookById(@PathVariable Long id,
-                                   @RequestBody CreateBookRequestDto requestDto) {
+                                   @RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.updateBookById(id, requestDto);
     }
 
