@@ -1,8 +1,8 @@
 package mate.academy.onlinebookstore.dto;
 
 import jakarta.validation.constraints.NotNull;
-import java.math.BigDecimal;
 import jakarta.validation.constraints.Positive;
+import java.math.BigDecimal;
 import lombok.Data;
 
 @Data
