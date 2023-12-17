@@ -29,38 +29,44 @@ public class BookController {
     private final BookService bookService;
 
     @GetMapping
-    @Operation(summary = "Get all books")
+    @Operation(summary = "Get all books",
+            description = "Get list of all books")
     public List<BookDto> getAll(Pageable pageable) {
         return bookService.getAll(pageable);
     }
 
     @GetMapping("/{id}")
-    @Operation(summary = "Find book by id")
+    @Operation(summary = "Find book by id",
+            description = "Find certain book using book id")
     public BookDto getBookById(@PathVariable Long id) {
         return bookService.findById(id);
     }
 
     @GetMapping("/search")
-    @Operation(summary = "Find all books with parameters")
+    @Operation(summary = "Find all books with parameters",
+            description = "Find all books using search parameters")
     public List<BookDto> search(BookSearchParametersDto searchParametersDto) {
         return bookService.search(searchParametersDto);
     }
 
     @PostMapping
-    @Operation(summary = "Create a new book")
+    @Operation(summary = "Create a new book",
+            description = "Create a new book")
     private BookDto createBook(@RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.createBook(requestDto);
     }
 
     @PutMapping("/{id}")
-    @Operation(summary = "Update book by id")
+    @Operation(summary = "Update book by id",
+            description = "Update certain book using book id")
     private BookDto updateBookById(@PathVariable Long id,
                                    @RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.updateBookById(id, requestDto);
     }
 
     @DeleteMapping("/{id}")
-    @Operation(summary = "Delete book by id")
+    @Operation(summary = "Delete book by id",
+            description = "Delete certain book using book id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     private void deleteBookById(@PathVariable Long id) {
         bookService.deleteBookById(id);
