@@ -2,7 +2,6 @@ package mate.academy.onlinebookstore.service.impl;
 
 import jakarta.transaction.Transactional;
 import java.util.List;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import mate.academy.onlinebookstore.dto.BookDto;
 import mate.academy.onlinebookstore.dto.BookSearchParametersDto;
@@ -29,13 +28,6 @@ public class BookServiceImpl implements BookService {
         Book book = bookMapper.toModel(bookDto);
         Book savedBook = bookRepository.save(book);
         return bookMapper.toDto(savedBook);
-    }
-
-    @Override
-    public List<BookDto> getAll() {
-        return bookRepository.findAll().stream()
-                .map(bookMapper::toDto)
-                .collect(Collectors.toList());
     }
 
     @Override
