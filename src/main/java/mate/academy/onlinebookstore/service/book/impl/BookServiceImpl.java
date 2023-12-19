@@ -1,4 +1,4 @@
-package mate.academy.onlinebookstore.service.impl;
+package mate.academy.onlinebookstore.service.book.impl;
 
 import jakarta.transaction.Transactional;
 import java.util.List;
@@ -11,7 +11,7 @@ import mate.academy.onlinebookstore.mapper.BookMapper;
 import mate.academy.onlinebookstore.model.Book;
 import mate.academy.onlinebookstore.repository.book.BookRepository;
 import mate.academy.onlinebookstore.repository.book.BookSpecificationBuilder;
-import mate.academy.onlinebookstore.service.BookService;
+import mate.academy.onlinebookstore.service.book.BookService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
