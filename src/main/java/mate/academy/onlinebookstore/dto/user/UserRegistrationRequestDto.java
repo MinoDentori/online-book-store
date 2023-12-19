@@ -1,9 +1,9 @@
 package mate.academy.onlinebookstore.dto.user;
 
-import static mate.academy.onlinebookstore.util.ConstraintsMessages.NOT_NULL_MESSAGE;
+import static mate.academy.onlinebookstore.util.ConstraintsMessages.NOT_BLANK_MESSAGE;
 
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import mate.academy.onlinebookstore.validator.FieldMatch;
 
@@ -14,16 +14,16 @@ import mate.academy.onlinebookstore.validator.FieldMatch;
 )
 @Data
 public class UserRegistrationRequestDto {
-    @NotNull(message = NOT_NULL_MESSAGE)
+    @NotBlank(message = NOT_BLANK_MESSAGE)
     @Email
     private String email;
-    @NotNull(message = NOT_NULL_MESSAGE)
+    @NotBlank(message = NOT_BLANK_MESSAGE)
     private String password;
-    @NotNull(message = NOT_NULL_MESSAGE)
+    @NotBlank(message = NOT_BLANK_MESSAGE)
     private String repeatPassword;
-    @NotNull(message = NOT_NULL_MESSAGE)
+    @NotBlank(message = NOT_BLANK_MESSAGE)
     private String firstName;
-    @NotNull(message = NOT_NULL_MESSAGE)
+    @NotBlank(message = NOT_BLANK_MESSAGE)
     private String lastName;
     private String shippingAddress;
 }
