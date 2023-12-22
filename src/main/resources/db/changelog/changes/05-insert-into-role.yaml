@@ -1,17 +1,17 @@
 
 databaseChangeLog:
   - changeSet:
-      id: insert-role
+      id: insert-into-role
       author: mykhailo.dymusha
       changes:
         - insert:
-            tableName: roles
+            tableName: role
             columns:
               - column:
                   name: role_name
                   value: ADMIN
         - insert:
-            tableName: roles
+            tableName: role
             columns:
               - column:
                   name: role_name

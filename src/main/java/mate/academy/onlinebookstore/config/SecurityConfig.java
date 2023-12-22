@@ -17,10 +17,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @RequiredArgsConstructor
 public class SecurityConfig {
     private final UserDetailsService userDetailsService;
+
     @Bean
     public PasswordEncoder getPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
