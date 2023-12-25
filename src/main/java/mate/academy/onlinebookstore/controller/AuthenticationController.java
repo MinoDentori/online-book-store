@@ -5,8 +5,11 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import mate.academy.onlinebookstore.dto.user.UserDto;
+import mate.academy.onlinebookstore.dto.user.UserLoginRequestDto;
+import mate.academy.onlinebookstore.dto.user.UserLoginResponseDto;
 import mate.academy.onlinebookstore.dto.user.UserRegistrationRequestDto;
 import mate.academy.onlinebookstore.exception.RegistrationException;
+import mate.academy.onlinebookstore.security.AuthenticationService;
 import mate.academy.onlinebookstore.service.user.UserService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 public class AuthenticationController {
     private final UserService userService;
+    private final AuthenticationService authenticationService;
 
     @PostMapping("/registration")
     @Operation(summary = "Register a new user",
@@ -28,4 +32,12 @@ public class AuthenticationController {
             throws RegistrationException {
         return userService.registerUser(requestDto);
     }
+
+    @PostMapping("/login")
+    @Operation(summary = "Login for user",
+            description = "Allow user to login using credentials")
+    public UserLoginResponseDto login(@RequestBody UserLoginRequestDto requestDto) {
+        return authenticationService.authenticate(requestDto);
+    }
+
 }
