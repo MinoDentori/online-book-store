@@ -1,6 +1,6 @@
 package mate.academy.onlinebookstore.validator;
 
-import static mate.academy.onlinebookstore.util.ConstraintsMessages.VALUES_DONT_MATCH;
+import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.VALUES_DONT_MATCH;
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;

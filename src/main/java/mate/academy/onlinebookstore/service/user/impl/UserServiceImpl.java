@@ -1,6 +1,6 @@
 package mate.academy.onlinebookstore.service.user.impl;
 
-import static mate.academy.onlinebookstore.util.ConstraintsMessages.USER_WITH_THIS_EMAIL_ALREADY_EXIST;
+import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.USER_WITH_THIS_EMAIL_ALREADY_EXIST;
 
 import lombok.RequiredArgsConstructor;
 import mate.academy.onlinebookstore.dto.user.UserDto;

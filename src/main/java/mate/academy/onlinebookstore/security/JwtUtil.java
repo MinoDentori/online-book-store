@@ -1,6 +1,6 @@
 package mate.academy.onlinebookstore.security;
 
-import static mate.academy.onlinebookstore.util.ConstraintsMessages.INVALID_JWT_TOKEN;
+import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.INVALID_JWT_TOKEN;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
