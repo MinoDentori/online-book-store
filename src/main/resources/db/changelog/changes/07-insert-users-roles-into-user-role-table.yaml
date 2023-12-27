@@ -2,13 +2,20 @@ databaseChangeLog:
   - changeSet:
       id: insert-into-user-role
       author: mykhailo.dymusha
+      preConditions:
+        - sqlCheck:
+            expectedResult: 1
+            sql: SELECT COUNT(*) FROM user WHERE email='admin.email@gmail.com'
+        - sqlCheck:
+            expectedResult: 1
+            sql: SELECT COUNT(*) FROM role WHERE role_name='ADMIN'
       changes:
         - insert:
             tableName: user_role
             columns:
               - column:
-                  name: role_id
-                  value: 1
-              - column:
                   name: user_id
-                  value: 1
+                  valueComputed: (SELECT id FROM user WHERE email='admin.email@gmail.com')
+              - column:
+                  name: role_id
+                  valueComputed: (SELECT id FROM role WHERE role_name='ADMIN')
