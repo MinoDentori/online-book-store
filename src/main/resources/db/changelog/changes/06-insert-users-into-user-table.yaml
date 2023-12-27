@@ -1,0 +1,20 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-into-user
+      author: mykhailo.dymusha
+      changes:
+        - insert:
+            tableName: user
+            columns:
+              - column:
+                  name: email
+                  value: admin.email@gmail.com
+              - column:
+                  name: password
+                  value: 12345678
+              - column:
+                  name: first_name
+                  value: AdminName
+              - column:
+                  name: last_name
+                  value: AdminLastName

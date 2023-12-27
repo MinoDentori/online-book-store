@@ -1,0 +1,14 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-into-user-role
+      author: mykhailo.dymusha
+      changes:
+        - insert:
+            tableName: user_role
+            columns:
+              - column:
+                  name: role_id
+                  value: 1
+              - column:
+                  name: user_id
+                  value: 1

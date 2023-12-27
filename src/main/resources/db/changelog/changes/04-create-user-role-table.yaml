@@ -1,23 +1,24 @@
 databaseChangeLog:
-  - changeSet:
-      id: create-user-role-table
-      author: mykhailo.dymusha
-      changes:
-        - createTable:
-            tableName: user_role
-            columns:
-              - column:
-                  name: id
-                  type: bigint
-                  autoIncrement: true
-                  constraints:
-                    primaryKey: true
-                    nullable: false
-              - column:
-                  name: role_id
-                  type: bigint
-                  constraints:
-                    nullable: false
-              - column:
-                  name: user_id
-                  type: bigint
+- changeSet:
+    id: create-user-role-table
+    author: mykhailo.dymusha
+    changes:
+      - createTable:
+          tableName: user_role
+          columns:
+            - column:
+                name: role_id
+                type: bigint
+                constraints:
+                  foreignKeyName: fk_user_role_role_id
+                  primaryKey: true
+                  nullable: false
+                  references: role(id)
+            - column:
+                name: user_id
+                type: bigint
+                constraints:
+                  foreignKeyName: fk_user_role_user_id
+                  primaryKey: true
+                  nullable: false
+                  references: user(id)
