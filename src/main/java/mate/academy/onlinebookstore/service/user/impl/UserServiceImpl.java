@@ -10,6 +10,7 @@ import mate.academy.onlinebookstore.mapper.UserMapper;
 import mate.academy.onlinebookstore.model.User;
 import mate.academy.onlinebookstore.repository.user.UserRepository;
 import mate.academy.onlinebookstore.service.user.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
     private final UserMapper userMapper;
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public UserDto registerUser(UserRegistrationRequestDto requestDto)
@@ -26,7 +28,7 @@ public class UserServiceImpl implements UserService {
         }
         User user = new User();
         user.setEmail(requestDto.getEmail());
-        user.setPassword(requestDto.getPassword());
+        user.setPassword(passwordEncoder.encode(requestDto.getPassword()));
         user.setFirstName(requestDto.getFirstName());
         user.setLastName(requestDto.getLastName());
         user.setShippingAddress(requestDto.getShippingAddress());
