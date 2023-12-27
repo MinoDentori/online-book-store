@@ -11,7 +11,7 @@ databaseChangeLog:
                   value: admin.email@gmail.com
               - column:
                   name: password
-                  value: 12345678
+                  value: $2y$10$XfiUU9.QiivxBPrgoTAzku6BK81cludbvvEqjkFXlcbePmatIEsuO
               - column:
                   name: first_name
                   value: AdminName
