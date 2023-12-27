@@ -1,6 +1,6 @@
 package mate.academy.onlinebookstore.security;
 
-import static mate.academy.onlinebookstore.util.ConstraintsMessages.CANT_FIND_USER_BY_EMAIL;
+import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.CANT_FIND_USER_BY_EMAIL;
 
 import lombok.RequiredArgsConstructor;
 import mate.academy.onlinebookstore.repository.user.UserRepository;

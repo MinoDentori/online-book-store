@@ -1,6 +1,6 @@
 package mate.academy.onlinebookstore.dto.user;
 
-import static mate.academy.onlinebookstore.util.ConstraintsMessages.NOT_BLANK_MESSAGE;
+import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.NOT_BLANK_MESSAGE;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
