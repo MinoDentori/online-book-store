@@ -1,5 +1,7 @@
 package mate.academy.onlinebookstore.service.category.impl;
 
+import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.CANT_GET_CATEGORY_FROM_DB_BY_ID;
+
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import mate.academy.onlinebookstore.dto.category.CategoryDto;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class CategoryServiceImpl implements CategoryService {
+
     private CategoryRepository categoryRepository;
     private CategoryMapper categoryMapper;
 
@@ -30,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryDto findById(Long id) {
         Category foundCategory = categoryRepository.findById(id)
                 .orElseThrow(() ->
-                        new EntityNotFoundException("Can't get Category from DB by id:" + id));
+                        new EntityNotFoundException(CANT_GET_CATEGORY_FROM_DB_BY_ID + id));
         return categoryMapper.toDto(foundCategory);
     }
 
@@ -45,7 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryDto updateCategoryById(Long id, CreateCategoryRequestDto requestDto) {
         Category foundCategory = categoryRepository.findById(id)
                 .orElseThrow(() ->
-                        new EntityNotFoundException("Can't get Category from DB by id:" + id));
+                        new EntityNotFoundException(CANT_GET_CATEGORY_FROM_DB_BY_ID + id));
         Category updatedCategory = categoryMapper.toEntity(requestDto);
         updatedCategory.setId(id);
         categoryRepository.save(updatedCategory);

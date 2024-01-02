@@ -11,6 +11,8 @@ public final class ErrorMessagesConstants {
     public static final String INVALID_JWT_TOKEN = "Expired or invalid JWT token";
 
     public static final String CANT_GET_BOOK_FROM_DB_BY_ID = "Can't get Book from DB by id:";
+    public static final String CANT_GET_CATEGORY_FROM_DB_BY_ID =
+            "Can't get Category from DB by id:";
 
     private ErrorMessagesConstants() {
     }
