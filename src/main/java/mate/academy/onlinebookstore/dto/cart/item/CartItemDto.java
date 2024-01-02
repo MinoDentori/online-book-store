@@ -1,4 +1,4 @@
-package mate.academy.onlinebookstore.dto.cart;
+package mate.academy.onlinebookstore.dto.cart.item;
 
 import lombok.Data;
 
