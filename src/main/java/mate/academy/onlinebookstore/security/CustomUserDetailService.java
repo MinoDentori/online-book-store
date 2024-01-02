@@ -1,6 +1,6 @@
 package mate.academy.onlinebookstore.security;
 
-import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.CANT_FIND_USER_BY_EMAIL;
+import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.USER_NOT_FOUND_WITH_EMAIL;
 
 import lombok.RequiredArgsConstructor;
 import mate.academy.onlinebookstore.repository.user.UserRepository;
@@ -18,6 +18,6 @@ public class CustomUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email)
             throws UsernameNotFoundException {
         return userRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException(CANT_FIND_USER_BY_EMAIL));
+                .orElseThrow(() -> new UsernameNotFoundException(USER_NOT_FOUND_WITH_EMAIL));
     }
 }

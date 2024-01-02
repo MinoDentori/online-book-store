@@ -1,6 +1,6 @@
 package mate.academy.onlinebookstore.service.category.impl;
 
-import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.CANT_GET_CATEGORY_FROM_DB_BY_ID;
+import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.CATEGORY_NOT_FOUND_WITH_ID;
 
 import java.util.List;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +33,7 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryDto findById(Long id) {
         Category foundCategory = categoryRepository.findById(id)
                 .orElseThrow(() ->
-                        new EntityNotFoundException(CANT_GET_CATEGORY_FROM_DB_BY_ID + id));
+                        new EntityNotFoundException(CATEGORY_NOT_FOUND_WITH_ID + id));
         return categoryMapper.toDto(foundCategory);
     }
 
@@ -48,7 +48,7 @@ public class CategoryServiceImpl implements CategoryService {
     public CategoryDto updateCategoryById(Long id, CreateCategoryRequestDto requestDto) {
         Category foundCategory = categoryRepository.findById(id)
                 .orElseThrow(() ->
-                        new EntityNotFoundException(CANT_GET_CATEGORY_FROM_DB_BY_ID + id));
+                        new EntityNotFoundException(CATEGORY_NOT_FOUND_WITH_ID + id));
         Category updatedCategory = categoryMapper.toEntity(requestDto);
         updatedCategory.setId(id);
         categoryRepository.save(updatedCategory);
