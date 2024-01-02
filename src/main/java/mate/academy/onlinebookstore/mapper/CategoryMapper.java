@@ -7,7 +7,6 @@ import mate.academy.onlinebookstore.model.Category;
 import org.mapstruct.Mapper;
 
 @Mapper(config = MapperConfig.class)
-
 public interface CategoryMapper {
     CategoryDto toDto(Category category);
 

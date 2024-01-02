@@ -1,6 +1,6 @@
 package mate.academy.onlinebookstore.service.book.impl;
 
-import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.CANT_GET_BOOK_FROM_DB_BY_ID;
+import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.BOOK_NOT_FOUND_WITH_ID;
 
 import jakarta.transaction.Transactional;
 import java.util.HashSet;
@@ -64,7 +64,7 @@ public class BookServiceImpl implements BookService {
     @Override
     public BookDto findById(Long id) {
         Book foundedBook = bookRepository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException(CANT_GET_BOOK_FROM_DB_BY_ID + id));
+                new EntityNotFoundException(BOOK_NOT_FOUND_WITH_ID + id));
         return bookMapper.toDto(foundedBook);
     }
 
@@ -72,7 +72,7 @@ public class BookServiceImpl implements BookService {
     @Transactional
     public BookDto updateBookById(Long id, CreateBookRequestDto requestDto) {
         bookRepository.findById(id).orElseThrow(() ->
-                new EntityNotFoundException(CANT_GET_BOOK_FROM_DB_BY_ID + id));
+                new EntityNotFoundException(BOOK_NOT_FOUND_WITH_ID + id));
         Book updatedBook = bookMapper.toModel(requestDto);
         updatedBook.setId(id);
         Set<Long> categoryIds = requestDto.getCategoryIds();
