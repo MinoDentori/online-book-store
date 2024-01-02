@@ -57,7 +57,7 @@ public class CategoryController {
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Create a new Category",
             description = "Create a new Category")
-    private CategoryDto createCategory(CreateCategoryRequestDto requestDto) {
+    private CategoryDto createCategory(@RequestBody @Valid CreateCategoryRequestDto requestDto) {
         return categoryService.save(requestDto);
     }
 
