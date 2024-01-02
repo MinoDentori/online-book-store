@@ -1,9 +1,8 @@
 package mate.academy.onlinebookstore.dto.cart;
 
+import java.util.Set;
 import lombok.Data;
 import mate.academy.onlinebookstore.dto.cart.item.CartItemDto;
-
-import java.util.Set;
 
 @Data
 public class ShoppingCartDto {

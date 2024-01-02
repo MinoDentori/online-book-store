@@ -6,8 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Table;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -26,16 +26,14 @@ public class CartItem {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
-    @Column(nullable = false)
-    @JoinColumn(name = "shopping_cart_id")
+    @JoinColumn(name = "shopping_cart_id", nullable = false)
     private ShoppingCart shoppingCart;
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
-    @Column(nullable = false)
-    @JoinColumn(name = "book_id")
+    @JoinColumn(name = "book_id", nullable = false)
     private Book book;
     @Column(nullable = false)
     private int quantity;
-    private boolean is_deleted = false;
+    private boolean isDeleted = false;
 }

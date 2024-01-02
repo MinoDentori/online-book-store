@@ -2,13 +2,13 @@ package mate.academy.onlinebookstore.service.cart.impl;
 
 import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.BOOK_NOT_FOUND_WITH_ID;
 import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.CART_ITEM_NOT_FOUND_WITH_ID;
-import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.USER_NOT_FOUND_WITH_ID;
 import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.SHOPPING_CART_NOT_FOUND_WITH_USER_ID;
+import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.USER_NOT_FOUND_WITH_ID;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import mate.academy.onlinebookstore.dto.cart.item.AddToCartRequestDto;
 import mate.academy.onlinebookstore.dto.cart.ShoppingCartDto;
+import mate.academy.onlinebookstore.dto.cart.item.AddToCartRequestDto;
 import mate.academy.onlinebookstore.dto.cart.item.UpdateCartItemDto;
 import mate.academy.onlinebookstore.exception.EntityNotFoundException;
 import mate.academy.onlinebookstore.mapper.ShoppingCartMapper;
@@ -39,7 +39,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         Book book = bookRepository.findById(requestDto.getBookId())
                 .orElseThrow(() -> new EntityNotFoundException(BOOK_NOT_FOUND_WITH_ID));
         User user = userRepository.findById(id)
-                        .orElseThrow(() -> new EntityNotFoundException(USER_NOT_FOUND_WITH_ID + id));
+                        .orElseThrow(() -> new EntityNotFoundException(
+                                USER_NOT_FOUND_WITH_ID + id));
         ShoppingCart shoppingCartFromDB = shoppingCartMapper.toModel(findById(id));
 
         CartItem cartItem = new CartItem();

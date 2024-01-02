@@ -4,15 +4,15 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import mate.academy.onlinebookstore.dto.cart.item.AddToCartRequestDto;
 import mate.academy.onlinebookstore.dto.cart.ShoppingCartDto;
+import mate.academy.onlinebookstore.dto.cart.item.AddToCartRequestDto;
 import mate.academy.onlinebookstore.dto.cart.item.UpdateCartItemDto;
 import mate.academy.onlinebookstore.model.User;
 import mate.academy.onlinebookstore.service.cart.CartItemService;
 import mate.academy.onlinebookstore.service.cart.ShoppingCartService;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,6 +31,7 @@ public class ShoppingCartController {
 
     private final ShoppingCartService shoppingCartService;
     private final CartItemService cartItemService;
+
     @PostMapping
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @Operation(summary = "Add an item to shopping cart",

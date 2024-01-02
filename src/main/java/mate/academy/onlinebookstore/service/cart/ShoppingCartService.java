@@ -1,7 +1,7 @@
 package mate.academy.onlinebookstore.service.cart;
 
-import mate.academy.onlinebookstore.dto.cart.item.AddToCartRequestDto;
 import mate.academy.onlinebookstore.dto.cart.ShoppingCartDto;
+import mate.academy.onlinebookstore.dto.cart.item.AddToCartRequestDto;
 import mate.academy.onlinebookstore.dto.cart.item.UpdateCartItemDto;
 
 public interface ShoppingCartService {
