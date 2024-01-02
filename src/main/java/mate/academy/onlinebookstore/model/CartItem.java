@@ -1,5 +1,6 @@
 package mate.academy.onlinebookstore.model;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,13 +26,16 @@ public class CartItem {
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
+    @Column(nullable = false)
     @JoinColumn(name = "shopping_cart_id")
     private ShoppingCart shoppingCart;
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne
+    @Column(nullable = false)
     @JoinColumn(name = "book_id")
     private Book book;
+    @Column(nullable = false)
     private int quantity;
     private boolean is_deleted = false;
 }
