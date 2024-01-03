@@ -74,8 +74,10 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
                 .orElseThrow(() -> new EntityNotFoundException(
                         SHOPPING_CART_NOT_FOUND_WITH_USER_ID + userId));
 
-        CartItem cartItem = cartItemRepository.findByIdAndShoppingCartId(cartItemId, shoppingCart.getId())
-                .orElseThrow(() -> new EntityNotFoundException(CART_ITEM_NOT_FOUND_WITH_ID + cartItemId));
+        CartItem cartItem = cartItemRepository
+                .findByIdAndShoppingCartId(cartItemId, shoppingCart.getId())
+                .orElseThrow(() -> new EntityNotFoundException(
+                        CART_ITEM_NOT_FOUND_WITH_ID + cartItemId));
 
         cartItem.setQuantity(requestDto.getQuantity());
         cartItemRepository.save(cartItem);
