@@ -44,7 +44,7 @@ public class ShoppingCartController {
         return shoppingCartService.addToCart(requestDto, user.getId());
     }
 
-    @GetMapping()
+    @GetMapping
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @Operation(summary = "Get a shopping cart with items",
             description = "Get a shopping cart with items")
