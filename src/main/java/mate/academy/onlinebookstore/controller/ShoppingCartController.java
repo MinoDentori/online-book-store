@@ -37,7 +37,7 @@ public class ShoppingCartController {
     @Operation(summary = "Add an item to shopping cart",
             description = "Add an item to shopping cart")
     public ShoppingCartDto addToCart(
-            @RequestBody AddToCartRequestDto requestDto,
+            @RequestBody @Valid AddToCartRequestDto requestDto,
             Authentication authentication
     ) {
         User user = (User) authentication.getPrincipal();
