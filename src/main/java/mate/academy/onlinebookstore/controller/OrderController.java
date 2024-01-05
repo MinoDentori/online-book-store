@@ -3,6 +3,7 @@ package mate.academy.onlinebookstore.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import java.util.List;
 import java.util.Set;
 import lombok.RequiredArgsConstructor;
 import mate.academy.onlinebookstore.dto.order.OrderDto;
@@ -37,8 +38,8 @@ public class OrderController {
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @Operation(summary = "Retrieve user's order history",
             description = "Retrieve user's order history")
-    public Set<OrderDto> findAllOrders(Authentication authentication,
-                                               Pageable pageable) {
+    public List<OrderDto> findAllOrders(Authentication authentication,
+                                        Pageable pageable) {
         User user = (User) authentication.getPrincipal();
         return orderService.findAllOrders(user.getId(), pageable);
     }

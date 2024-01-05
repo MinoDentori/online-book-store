@@ -7,8 +7,8 @@ import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.USER_NOT_
 import jakarta.transaction.Transactional;
 import java.math.BigDecimal;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import mate.academy.onlinebookstore.dto.order.OrderDto;
 import mate.academy.onlinebookstore.dto.order.PlaceOrderRequestDto;
@@ -40,11 +40,11 @@ public class OrderServiceImpl implements OrderService {
     private final OrderMapper orderMapper;
 
     @Override
-    public Set<OrderDto> findAllOrders(Long userId, Pageable pageable) {
+    public List<OrderDto> findAllOrders(Long userId, Pageable pageable) {
         return orderRepository.findOrdersByUserId(userId)
                 .stream()
                 .map(orderMapper::toDto)
-                .collect(Collectors.toSet());
+                .toList();
     }
 
     @Override

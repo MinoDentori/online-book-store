@@ -1,13 +1,13 @@
 package mate.academy.onlinebookstore.service.order;
 
-import java.util.Set;
+import java.util.List;
 import mate.academy.onlinebookstore.dto.order.OrderDto;
 import mate.academy.onlinebookstore.dto.order.PlaceOrderRequestDto;
 import mate.academy.onlinebookstore.dto.order.item.UpdateRequestOrderItemDto;
 import org.springframework.data.domain.Pageable;
 
 public interface OrderService {
-    Set<OrderDto> findAllOrders(Long userId, Pageable pageable);
+    List<OrderDto> findAllOrders(Long userId, Pageable pageable);
 
     OrderDto placeOrder(Long userId, PlaceOrderRequestDto requestDto);
 
