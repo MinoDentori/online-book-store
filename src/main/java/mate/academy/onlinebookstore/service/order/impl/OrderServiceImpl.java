@@ -1,13 +1,26 @@
 package mate.academy.onlinebookstore.service.order.impl;
 
+import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.ORDER_NOT_FOUND_WITH_ID;
+import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.SHOPPING_CART_NOT_FOUND_WITH_USER_ID;
+import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.USER_NOT_FOUND_WITH_ID;
+
 import jakarta.transaction.Transactional;
+import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import mate.academy.onlinebookstore.dto.order.OrderDto;
 import mate.academy.onlinebookstore.dto.order.PlaceOrderRequestDto;
 import mate.academy.onlinebookstore.dto.order.item.UpdateRequestOrderItemDto;
 import mate.academy.onlinebookstore.exception.EntityNotFoundException;
 import mate.academy.onlinebookstore.mapper.OrderMapper;
-import mate.academy.onlinebookstore.model.*;
+import mate.academy.onlinebookstore.model.Book;
+import mate.academy.onlinebookstore.model.CartItem;
+import mate.academy.onlinebookstore.model.Order;
+import mate.academy.onlinebookstore.model.OrderItem;
+import mate.academy.onlinebookstore.model.ShoppingCart;
+import mate.academy.onlinebookstore.model.User;
 import mate.academy.onlinebookstore.repository.cart.ShoppingCartRepository;
 import mate.academy.onlinebookstore.repository.order.OrderItemRepository;
 import mate.academy.onlinebookstore.repository.order.OrderRepository;
@@ -15,13 +28,6 @@ import mate.academy.onlinebookstore.repository.user.UserRepository;
 import mate.academy.onlinebookstore.service.order.OrderService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.*;
 
 @Service
 @RequiredArgsConstructor

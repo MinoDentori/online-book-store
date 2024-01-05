@@ -3,6 +3,8 @@ package mate.academy.onlinebookstore.service.order.impl;
 import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.ORDER_ITEM_NOT_FOUND_WITH_ID;
 import static mate.academy.onlinebookstore.util.ErrorMessagesConstants.ORDER_NOT_FOUND_WITH_ID;
 
+import java.util.Set;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import mate.academy.onlinebookstore.dto.order.item.OrderItemResponseDto;
 import mate.academy.onlinebookstore.exception.EntityNotFoundException;
@@ -14,10 +16,6 @@ import mate.academy.onlinebookstore.repository.order.OrderRepository;
 import mate.academy.onlinebookstore.service.order.OrderItemService;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-
 
 @Service
 @RequiredArgsConstructor

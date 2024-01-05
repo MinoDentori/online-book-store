@@ -5,5 +5,5 @@ import mate.academy.onlinebookstore.model.Order;
 
 @Data
 public class UpdateRequestOrderItemDto {
-        private Order.Status status;
+    private Order.Status status;
 }
