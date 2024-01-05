@@ -37,14 +37,14 @@ public class ShoppingCartController {
     @Operation(summary = "Add an item to shopping cart",
             description = "Add an item to shopping cart")
     public ShoppingCartDto addToCart(
-            @RequestBody AddToCartRequestDto requestDto,
+            @RequestBody @Valid AddToCartRequestDto requestDto,
             Authentication authentication
     ) {
         User user = (User) authentication.getPrincipal();
         return shoppingCartService.addToCart(requestDto, user.getId());
     }
 
-    @GetMapping()
+    @GetMapping
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @Operation(summary = "Get a shopping cart with items",
             description = "Get a shopping cart with items")

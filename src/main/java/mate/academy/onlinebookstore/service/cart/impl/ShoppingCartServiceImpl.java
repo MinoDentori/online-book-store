@@ -68,13 +68,16 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     }
 
     @Override
-    public ShoppingCartDto updateItem(Long userId, Long id, UpdateCartItemDto requestDto) {
+    @Transactional
+    public ShoppingCartDto updateItem(Long userId, Long cartItemId, UpdateCartItemDto requestDto) {
         ShoppingCart shoppingCart = shoppingCartRepository.findByUserId(userId)
                 .orElseThrow(() -> new EntityNotFoundException(
                         SHOPPING_CART_NOT_FOUND_WITH_USER_ID + userId));
 
-        CartItem cartItem = cartItemRepository.findByIdAndShoppingCartId(id, shoppingCart.getId())
-                .orElseThrow(() -> new EntityNotFoundException(CART_ITEM_NOT_FOUND_WITH_ID + id));
+        CartItem cartItem = cartItemRepository
+                .findByIdAndShoppingCartId(cartItemId, shoppingCart.getId())
+                .orElseThrow(() -> new EntityNotFoundException(
+                        CART_ITEM_NOT_FOUND_WITH_ID + cartItemId));
 
         cartItem.setQuantity(requestDto.getQuantity());
         cartItemRepository.save(cartItem);

@@ -1,13 +1,13 @@
 package mate.academy.onlinebookstore.dto.cart.item;
 
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 @Data
 public class AddToCartRequestDto {
     @NotNull
     private Long bookId;
-    @Positive
+    @Min(value = 1, message = "should be at list 1")
     private int quantity;
 }

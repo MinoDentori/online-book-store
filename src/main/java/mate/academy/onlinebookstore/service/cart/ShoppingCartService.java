@@ -9,5 +9,5 @@ public interface ShoppingCartService {
 
     ShoppingCartDto findById(Long id);
 
-    ShoppingCartDto updateItem(Long userId, Long id, UpdateCartItemDto requestDto);
+    ShoppingCartDto updateItem(Long userId, Long cartItemId, UpdateCartItemDto requestDto);
 }
