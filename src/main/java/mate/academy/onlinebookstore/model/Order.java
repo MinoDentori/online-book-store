@@ -52,7 +52,7 @@ public class Order {
     private Set<OrderItem> orderItems;
     private boolean isDeleted = false;
 
-    enum Status {
+    public enum Status {
         PENDING,
         COMPLETED,
         DELIVERED

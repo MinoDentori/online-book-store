@@ -20,6 +20,8 @@ public final class ErrorMessagesConstants {
 
     public static final String CART_ITEM_NOT_FOUND_WITH_ID =
             "Didn't find CartItem with id:";
+    public static final String ORDER_NOT_FOUND_WITH_ID = "Didn't find an order with id: ";
+    public static final String ORDER_ITEM_NOT_FOUND_WITH_ID = "Didn't find an order item with id: ";
 
     private ErrorMessagesConstants() {
     }
