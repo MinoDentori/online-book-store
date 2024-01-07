@@ -4,7 +4,7 @@ databaseChangeLog:
       author: mykhailo.dymusha
       changes:
         - createTable:
-            tableName: cart-item
+            tableName: cart_item
             columns:
               - column:
                   name: id
@@ -29,7 +29,7 @@ databaseChangeLog:
                     foreignKeyName: fk_cart_item_book_id
               - column:
                   name: quantity
-                  type: bigint
+                  type: integer
                   constraints:
                     nullable: false
               - column:

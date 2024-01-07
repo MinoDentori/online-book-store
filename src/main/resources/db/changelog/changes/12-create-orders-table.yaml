@@ -30,6 +30,11 @@ databaseChangeLog:
                   constraints:
                     nullable: false
               - column:
+                  name: order_date
+                  type: timestamp
+                  constraints:
+                    nullable: false
+              - column:
                   name: shipping_address
                   type: varchar(255)
                   constraints:

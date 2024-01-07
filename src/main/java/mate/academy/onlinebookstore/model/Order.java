@@ -19,8 +19,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
+import org.hibernate.type.SqlTypes;
 
 @Data
 @Entity
@@ -38,6 +40,7 @@ public class Order {
     private User user;
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private Status status;
     @Column(nullable = false)
     private BigDecimal total;
