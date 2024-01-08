@@ -33,26 +33,34 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     @JdbcTypeCode(SqlTypes.VARCHAR)
     private Status status;
+
     @Column(nullable = false)
     private BigDecimal total;
+
     @CreationTimestamp
     @Column(nullable = false)
     private LocalDateTime orderDate;
+
     @Column(nullable = false)
     private String shippingAddress;
+
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "order")
     private Set<OrderItem> orderItems;
+
+    @Column(nullable = false)
     private boolean isDeleted = false;
 
     public enum Status {
