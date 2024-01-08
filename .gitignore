@@ -54,3 +54,4 @@ build/
 *.zip
 *.tar.gz
 *.rar
+.env
