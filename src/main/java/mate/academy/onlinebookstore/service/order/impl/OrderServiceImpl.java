@@ -41,10 +41,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDto> findAllOrders(Long userId, Pageable pageable) {
-        return orderRepository.findOrdersByUserId(userId, pageable)
-                .stream()
-                .map(orderMapper::toDto)
-                .toList();
+        return orderMapper.listToDto(orderRepository.findOrdersByUserId(userId, pageable));
     }
 
     @Override
