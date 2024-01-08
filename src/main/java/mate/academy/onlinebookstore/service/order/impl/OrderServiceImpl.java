@@ -41,7 +41,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<OrderDto> findAllOrders(Long userId, Pageable pageable) {
-        return orderRepository.findOrdersByUserId(userId)
+        return orderRepository.findOrdersByUserId(userId, pageable)
                 .stream()
                 .map(orderMapper::toDto)
                 .toList();
@@ -56,20 +56,22 @@ public class OrderServiceImpl implements OrderService {
         ShoppingCart shoppingCart = shoppingCartRepository.findByUserId(userId)
                 .orElseThrow(() -> new EntityNotFoundException(
                         SHOPPING_CART_NOT_FOUND_WITH_USER_ID + userId));
+        BigDecimal total = calculateTotalForShoppingCart(shoppingCart);
 
-        BigDecimal total = BigDecimal.ZERO;
-        for (CartItem cartItem : shoppingCart.getCartItems()) {
-            BigDecimal itemPrice = cartItem.getBook().getPrice()
-                    .multiply(BigDecimal.valueOf(cartItem.getQuantity()));
-            total = total.add(itemPrice);
-        }
         Order order = new Order();
         order.setUser(user);
-        order.setStatus(Order.Status.valueOf(Order.Status.PENDING.name()));
+        order.setStatus(Order.Status.PENDING);
         order.setShippingAddress(requestDto.shippingAddress());
         order.setTotal(total);
+
         order = orderRepository.save(order);
 
+        Set<OrderItem> orderItems = getOrderItemsFromShoppingCart(shoppingCart, order);
+        order.setOrderItems(orderItems);
+        return orderMapper.toDto(order);
+    }
+
+    private Set<OrderItem> getOrderItemsFromShoppingCart(ShoppingCart shoppingCart, Order order) {
         Set<OrderItem> orderItems = new HashSet<>(shoppingCart.getCartItems().size());
         for (CartItem cartItem : shoppingCart.getCartItems()) {
             Book book = cartItem.getBook();
@@ -82,8 +84,17 @@ public class OrderServiceImpl implements OrderService {
             orderItemRepository.save(orderItem);
             orderItems.add(orderItem);
         }
-        order.setOrderItems(orderItems);
-        return orderMapper.toDto(order);
+        return orderItems;
+    }
+
+    private BigDecimal calculateTotalForShoppingCart(ShoppingCart shoppingCart) {
+        BigDecimal total = BigDecimal.ZERO;
+        for (CartItem cartItem : shoppingCart.getCartItems()) {
+            BigDecimal itemPrice = cartItem.getBook().getPrice()
+                    .multiply(BigDecimal.valueOf(cartItem.getQuantity()));
+            total = total.add(itemPrice);
+        }
+        return total;
     }
 
     @Override
