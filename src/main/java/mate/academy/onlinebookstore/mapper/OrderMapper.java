@@ -5,9 +5,7 @@ import mate.academy.onlinebookstore.dto.order.OrderDto;
 import mate.academy.onlinebookstore.model.Order;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.springframework.stereotype.Component;
 
-@Component
 @Mapper(config = MapperConfig.class, uses = OrderItemMapper.class)
 public interface OrderMapper {
     @Mapping(target = "userId", source = "user.id")

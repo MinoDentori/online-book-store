@@ -7,9 +7,7 @@ import mate.academy.onlinebookstore.dto.order.item.UpdateRequestOrderItemDto;
 import mate.academy.onlinebookstore.model.OrderItem;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
-import org.springframework.stereotype.Component;
 
-@Component
 @Mapper(config = MapperConfig.class)
 public interface OrderItemMapper {
     OrderItem toEntity(PlaceOrderRequestDto requestDto);
