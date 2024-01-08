@@ -11,8 +11,6 @@ services:
       - MYSQL_DATABASE=$MYSQLDB_DATABASE
     ports:
       - $MYSQLDB_LOCAL_PORT:$MYSQLDB_DOCKER_PORT
-    volumes:
-      - db:/var/lib/mysql
   app:
     depends_on:
       - mysqldb
@@ -32,3 +30,4 @@ services:
         "spring.datasource.driver-class-name" : "com.mysql.cj.jdbc.Driver",
         "spring.jpa.hibernate.ddl-auto" : "validate"      
       }'
+      JAVA_TOOL_OPTIONS: "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005"
