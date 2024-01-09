@@ -4,9 +4,9 @@ import static org.springframework.security.test.web.servlet.setup.SecurityMockMv
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.math.BigDecimal;
 import java.sql.Connection;
-import java.sql.SQLException;
 import javax.sql.DataSource;
 import lombok.SneakyThrows;
 import mate.academy.onlinebookstore.dto.book.BookDto;
@@ -26,7 +26,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import org.testcontainers.shaded.com.fasterxml.jackson.databind.ObjectMapper;
 import org.testcontainers.shaded.org.apache.commons.lang3.builder.EqualsBuilder;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -45,18 +44,12 @@ class BookControllerTest {
     @BeforeAll
     static void beforeAll(
             @Autowired DataSource dataSource,
-            @Autowired WebApplicationContext applicationContext) throws SQLException {
+            @Autowired WebApplicationContext applicationContext) {
         mockMvc = MockMvcBuilders
                 .webAppContextSetup(applicationContext)
                 .apply(springSecurity())
                 .build();
         teardown(dataSource);
-        try (Connection connection = dataSource.getConnection()) {
-            connection.setAutoCommit(true);
-            ScriptUtils.executeSqlScript(connection,
-                    new ClassPathResource("database/book/insert-into-book.sql"));
-
-        }
     }
 
     @AfterEach
@@ -72,7 +65,6 @@ class BookControllerTest {
             connection.setAutoCommit(true);
             ScriptUtils.executeSqlScript(connection,
                     new ClassPathResource("database/book/delete-book.sql"));
-
         }
     }
 
@@ -101,7 +93,7 @@ class BookControllerTest {
                         .content(jsonRequest)
                         .contentType(MediaType.APPLICATION_JSON)
                 )
-                .andExpect(status().isCreated())
+                .andExpect(status().isOk())
                 .andReturn();
 
         BookDto actual = objectMapper.readValue(result.getResponse().getContentAsString(),

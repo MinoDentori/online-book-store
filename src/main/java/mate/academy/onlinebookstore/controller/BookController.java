@@ -54,7 +54,7 @@ public class BookController {
     }
 
     @PostMapping
-    @PreAuthorize("hasRole('ADMIN')")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @Operation(summary = "Create a new book",
             description = "Create a new book")
     private BookDto createBook(@RequestBody @Valid CreateBookRequestDto requestDto) {

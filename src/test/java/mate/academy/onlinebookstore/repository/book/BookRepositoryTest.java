@@ -2,7 +2,6 @@ package mate.academy.onlinebookstore.repository.book;
 
 import java.math.BigDecimal;
 import java.util.List;
-import mate.academy.onlinebookstore.dto.book.BookDtoWithoutCategoryIds;
 import mate.academy.onlinebookstore.model.Book;
 import mate.academy.onlinebookstore.model.Category;
 import org.junit.jupiter.api.Assertions;
@@ -37,9 +36,9 @@ class BookRepositoryTest {
             "classpath:database/category/insert-into-book-category.sql"
     }, executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     @Sql(scripts = {
+            "classpath:database/category/delete-book-category.sql",
             "classpath:database/book/delete-book.sql",
-            "classpath:database/category/delete-category.sql",
-            "classpath:database/category/delete-book-category.sql"
+            "classpath:database/category/delete-category.sql"
     }, executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
     void findAllByCategoryId_ExistingCategoryWithIdOne_ReturnOneBook() {
         Category fanstasyCategory = new Category();
@@ -49,7 +48,7 @@ class BookRepositoryTest {
 
         Book defaultBook = getDefaultBook();
         List<Book> expected = List.of(defaultBook);
-        List<BookDtoWithoutCategoryIds> actual = bookRepository
+        List<Book> actual = bookRepository
                 .findAllByCategoryId(fanstasyCategory.getId());
         Assertions.assertNotNull(actual);
         EqualsBuilder.reflectionEquals(expected,actual);
