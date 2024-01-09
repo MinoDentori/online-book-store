@@ -17,7 +17,6 @@ import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
-import org.hibernate.validator.constraints.ISBN;
 
 @Data
 @Entity
@@ -32,7 +31,6 @@ public class Book {
     private String title;
     @Column(nullable = false)
     private String author;
-    @ISBN
     @Column(unique = true, nullable = false)
     private String isbn;
     @Column(nullable = false)

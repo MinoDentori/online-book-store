@@ -7,6 +7,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.util.HashSet;
+import java.util.Set;
 import javax.sql.DataSource;
 import lombok.SneakyThrows;
 import mate.academy.onlinebookstore.dto.book.BookDto;
@@ -68,16 +70,20 @@ class BookControllerTest {
         }
     }
 
-    @WithMockUser(username = "admin", roles = {"ADMIN"})
     @Test
     @DisplayName("Create a new book")
+    @WithMockUser(username = "admin", roles = {"ADMIN"})
     void create_ValidRequestDto_Success() throws Exception {
+        Set<Long> categories = new HashSet<>();
+        categories.add(1L);
+
         CreateBookRequestDto requestDto = new CreateBookRequestDto()
                 .setAuthor(DEFAULT_AUTHOR)
                 .setIsbn(DEFAULT_ISBN)
                 .setPrice(new BigDecimal(DEFAULT_PRICE))
                 .setTitle(DEFAULT_TITLE)
-                .setDescription(DEFAULT_SHORT_DESCRIPTION);
+                .setDescription(DEFAULT_SHORT_DESCRIPTION)
+                .setCategoryIds(categories);
 
         BookDto expected = new BookDto()
                 .setId(DEFAULT_ID)
@@ -88,11 +94,10 @@ class BookControllerTest {
                 .setDescription(requestDto.getDescription());
 
         String jsonRequest = objectMapper.writeValueAsString(requestDto);
-        MvcResult result = mockMvc.perform(
-                post("/api/books")
+
+        MvcResult result = mockMvc.perform(post("/api/books")
                         .content(jsonRequest)
-                        .contentType(MediaType.APPLICATION_JSON)
-                )
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andReturn();
 
