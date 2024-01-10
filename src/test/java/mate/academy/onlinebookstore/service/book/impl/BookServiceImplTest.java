@@ -23,7 +23,7 @@ import org.testcontainers.shaded.org.apache.commons.lang3.builder.EqualsBuilder;
 @ExtendWith(MockitoExtension.class)
 class BookServiceImplTest {
     private static final long DEFAULT_ID = 1L;
-    private static final String DEFAULT_ISBN = "80-902734-1-6";
+    private static final String DEFAULT_ISBN = "9781408711705";
     private static final String DEFAULT_AUTHOR = "Kazuo Ishiguro";
     private static final String DEFAULT_TITLE = "The Buried Giant";
     private static final String DEFAULT_PRICE = "434.00";
@@ -41,13 +41,12 @@ class BookServiceImplTest {
             &psig=AOvVaw13ml9G4S0lS7NHxTvhDTsK&ust=1704823086061000&source=images
             &cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCOiRvYavzoMDFQAAAAAdAAAAABAD
             """;
-
-    @InjectMocks
-    private BookServiceImpl bookService;
     @Mock
     private BookRepository bookRepository;
     @Mock
     private BookMapper bookMapper;
+    @InjectMocks
+    private BookServiceImpl bookService;
 
     @Test
     @DisplayName("""
@@ -56,15 +55,20 @@ class BookServiceImplTest {
     void getAll_BookExist_ReturnsListWithAllBooks() {
         Book book = getDefaultBook();
         List<Book> bookList = List.of(book);
+
         Pageable pageable = PageRequest.of(0,5);
         Page<Book> page = new PageImpl<>(bookList, pageable, bookList.size());
+
         BookDto bookDto = getDefaultBookDto();
+
         Mockito.when(bookRepository.findAll(pageable)).thenReturn(page);
         Mockito.when(bookMapper.toDto(book)).thenReturn(bookDto);
+
         List<BookDto> actual = bookService.getAll(pageable);
         List<BookDto> expected = List.of(bookDto);
+
         Assertions.assertNotNull(actual);
-        EqualsBuilder.reflectionEquals(expected, actual);
+        EqualsBuilder.reflectionEquals(expected, actual, "id");
     }
 
     private Book getDefaultBook() {

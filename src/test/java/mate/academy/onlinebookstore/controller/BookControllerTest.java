@@ -34,7 +34,7 @@ import org.testcontainers.shaded.org.apache.commons.lang3.builder.EqualsBuilder;
 class BookControllerTest {
     protected static MockMvc mockMvc;
     private static final long DEFAULT_ID = 1L;
-    private static final String DEFAULT_ISBN = "80-902734-1-6";
+    private static final String DEFAULT_ISBN = "9781408711705";
     private static final String DEFAULT_AUTHOR = "Kazuo Ishiguro";
     private static final String DEFAULT_TITLE = "The Buried Giant";
     private static final String DEFAULT_PRICE = "434.00";

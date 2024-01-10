@@ -17,7 +17,7 @@ import org.testcontainers.shaded.org.apache.commons.lang3.builder.EqualsBuilder;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class BookRepositoryTest {
     private static final long DEFAULT_ID = 1L;
-    private static final String DEFAULT_ISBN = "80-902734-1-6";
+    private static final String DEFAULT_ISBN = "9781408711705";
     private static final String DEFAULT_AUTHOR = "Kazuo Ishiguro";
     private static final String DEFAULT_TITLE = "The Buried Giant";
     private static final String DEFAULT_PRICE = "434.00";
@@ -50,6 +50,7 @@ class BookRepositoryTest {
         List<Book> expected = List.of(defaultBook);
         List<Book> actual = bookRepository
                 .findAllByCategoryId(fanstasyCategory.getId());
+
         Assertions.assertNotNull(actual);
         EqualsBuilder.reflectionEquals(expected,actual);
     }
