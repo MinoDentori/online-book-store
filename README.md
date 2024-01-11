@@ -82,18 +82,29 @@ Run the application using your IDE or the command line.
 Access the platform through your web browser.
 
 ## Challenges and Solutions
+Understanding the project architecture:
+It was the first time I encountered such a large-scale project. 
+It was difficult to melt everything in place, to understand how each part is related to the other, 
+and how to fit them together so that the puzzle comes together and forms a single picture.
+Connecting Liquibase, writing scripts for automatic creation, updating tables, adding data to them:
+The process of automatically creating tables occupies an important place in the algorithm of the application 
+and is an important element of the life cycle of the application, 
+so it was very important to understand this technology well. 
+In my opinion, the most difficult thing was that the error made in the script 
+cannot be corrected without dropping all the tables, and you have to write additional scripts for changes and corrections. 
+It was an incentive to concentrate as much as possible, 
+because IDE cannot point to your inaccuracy, and you can rely only on yourself.
 
-The journey of creating Bookstore Pro wasn't without its challenges:
 
-Docker and Test Issues: 
-    Overcame Docker configuration challenges by restructuring the setup. 
-    Resolved test issues by revising the JwtAuthenticationFilter logic for successful test executions.
-Liquibase and Security Challenges: 
-    Addressed Liquibase sequencing problems for a smooth startup. 
-    Tackled security challenges by adjusting configurations to specify accessible endpoints for unregistered users.
+## Possible improvements
 
-## Postman Collection (Optional)
-
+At the moment, I am considering several possible improvements to the project, 
+which will enrich its functionality, offering, at the same time, new challenges.
+1. Connecting a system for receiving and processing electronic payments, such as Stripe. 
+This modern technological solution will allow users to pay for orders quickly and safely.
+2. Integration of Google API services for user authentication. 
+This will significantly reduce the time between the first login to the application 
+and the start of using the full functionality, which should encourage new users.
 
 
 
