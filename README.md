@@ -78,8 +78,17 @@ To set up Bookstore Pro and start exploring the literary world, follow these sim
 Clone the repository to your local machine.
 Ensure you have Java, Maven, and your preferred IDE installed.
 Configure the database settings in the application.properties file.
-Run the application using your IDE or the command line.
+Run the application using your IDE or by running the command `mvn spring-boot:run`
 Access the platform through your web browser.
+
+If you have Docker Compose installed, you can use the provided docker-compose.yml file to simplify the setup.
+Run the following command in the project directory: docker-compose up -d
+This will create and start the necessary containers, including the database.
+
+If you prefer using Docker Run directly, follow these steps:
+Build the Docker image: docker build -t bookstore-pro.
+Run the container: docker run -p 8080:8080 --name bookstore-pro -d bookstore-pro
+This will build the Docker image and run the container, exposing the application on port 8080.
 
 ## Challenges and Solutions
 Understanding the project architecture:
