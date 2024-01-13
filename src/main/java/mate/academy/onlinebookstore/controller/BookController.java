@@ -57,7 +57,7 @@ public class BookController {
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Create a new book",
             description = "Create a new book")
-    private BookDto createBook(@RequestBody @Valid CreateBookRequestDto requestDto) {
+    public BookDto createBook(@RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.createBook(requestDto);
     }
 
@@ -65,7 +65,7 @@ public class BookController {
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Update book by id",
             description = "Update certain book using book id")
-    private BookDto updateBookById(@PathVariable Long id,
+    public BookDto updateBookById(@PathVariable Long id,
                                    @RequestBody @Valid CreateBookRequestDto requestDto) {
         return bookService.updateBookById(id, requestDto);
     }
@@ -75,7 +75,7 @@ public class BookController {
     @Operation(summary = "Delete book by id",
             description = "Delete certain book using book id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    private void deleteBookById(@PathVariable Long id) {
+    public void deleteBookById(@PathVariable Long id) {
         bookService.deleteBookById(id);
     }
 }
