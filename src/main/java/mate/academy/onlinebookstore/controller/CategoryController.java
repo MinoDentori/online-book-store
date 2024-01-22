@@ -28,14 +28,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/categories ")
 @RequiredArgsConstructor
 public class CategoryController {
-    private CategoryService categoryService;
-    private BookService bookService;
+    private final CategoryService categoryService;
+    private final BookService bookService;
 
     @GetMapping
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @Operation(summary = "Find all Categories",
             description = "Find all Categories")
-    private List<CategoryDto> findAll(Pageable pageable) {
+    public List<CategoryDto> findAll(Pageable pageable) {
         return categoryService.findAll(pageable);
     }
 
@@ -43,7 +43,7 @@ public class CategoryController {
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @Operation(summary = "Find a certain Category by id",
             description = "Find a certain Category by id")
-    private CategoryDto findById(@PathVariable Long id) {
+    public CategoryDto findById(@PathVariable Long id) {
         return categoryService.findById(id);
     }
 
@@ -51,7 +51,7 @@ public class CategoryController {
     @PreAuthorize("hasAnyAuthority('USER', 'ADMIN')")
     @Operation(summary = "Find all books from the certain Category",
             description = "Find all books from the certain Category by category id")
-    private List<BookDtoWithoutCategoryIds> findAllBookByCategory(@PathVariable Long id) {
+    public List<BookDtoWithoutCategoryIds> findAllBookByCategory(@PathVariable Long id) {
         return bookService.findAllBookByCategory(id);
     }
 
@@ -60,7 +60,7 @@ public class CategoryController {
     @Operation(summary = "Create a new Category",
             description = "Create a new Category")
     @ResponseStatus(HttpStatus.CREATED)
-    private CategoryDto createCategory(@RequestBody @Valid CreateCategoryRequestDto requestDto) {
+    public CategoryDto createCategory(@RequestBody @Valid CreateCategoryRequestDto requestDto) {
         return categoryService.save(requestDto);
     }
 
@@ -68,7 +68,7 @@ public class CategoryController {
     @PreAuthorize("hasRole('ADMIN')")
     @Operation(summary = "Update Category by id",
             description = "Update certain Category using Category id")
-    private CategoryDto updateCategoryById(@PathVariable Long id,
+    public CategoryDto updateCategoryById(@PathVariable Long id,
                                    @RequestBody @Valid CreateCategoryRequestDto requestDto) {
         return categoryService.updateCategoryById(id, requestDto);
     }
@@ -78,7 +78,7 @@ public class CategoryController {
     @Operation(summary = "Delete a certain Category by id",
             description = "Delete a certain Category by id")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    private void deleteById(@PathVariable Long id) {
+    public void deleteById(@PathVariable Long id) {
         categoryService.deleteById(id);
     }
 }
